@@ -369,7 +369,7 @@
 			);
 			currentVersion = 31F2A8782C6D811800B7B494 /* GroceryTracker.xcdatamodel */;
 			name = GroceryTracker.xcdatamodeld;
-			path = /Users/elisakazan/src/grocerytracker/grocerytracker/GroceryTracker.xcdatamodeld;
+			path = GroceryTracker.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
