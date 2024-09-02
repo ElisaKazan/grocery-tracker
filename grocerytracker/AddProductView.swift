@@ -38,12 +38,14 @@ struct AddProductView: View {
                         Text("Product Name")
                         TextField("ex: Milk", text: $productName)
                             .textInputAutocapitalization(.words)
+                            .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Price")
                         TextField("ex: $7.99", value: $price, formatter: priceFormatter)
                             .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.trailing)
 
                     }
                     Picker("Store", selection: $store) {
@@ -55,17 +57,20 @@ struct AddProductView: View {
                 }
 
                 Section {
+
                     HStack {
                         Text("Sale Price (optional)")
-                            .lineLimit(1)
+                        Spacer()
                         TextField("ex: $3.50", value: $salePrice, formatter: priceFormatter)
                             .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Brand (optional)")
                         TextField("ex: Avalon", text: $brand)
                             .textInputAutocapitalization(.words)
+                            .multilineTextAlignment(.trailing)
                     }
                 }
                 
