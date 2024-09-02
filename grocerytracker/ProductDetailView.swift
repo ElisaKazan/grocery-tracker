@@ -42,6 +42,17 @@ struct ProductDetailView: View {
         }
         
         HStack {
+            Text("Sale Price:")
+            let priceToDisplay = product.salePrice > 0 ? priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
+            Text(priceToDisplay)
+        }
+
+        HStack {
+            Text("Brand:")
+            Text(product.brand ?? "Unknown")
+        }
+
+        HStack {
             Text("Last Updated:")
             Text(product.lastUpdated!, style: .date)
         }
