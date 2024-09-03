@@ -1,6 +1,6 @@
 A place to keep track of the prices of frequently purchased items in various stores. 
 
-This app will replace the clunky [Grocery Prices Spreadsheet](https://docs.google.com/spreadsheets/d/1CV9SSwuWb5LHJs947pUUsGAb21SWVi45sX3M4b0h7Ig/edit#gid=288718558). This app will be an easy way to check and add prices while shopping in a store.
+This app will be an easy way to check and add prices while shopping in a store and replace the clunky [Grocery Prices Spreadsheet](https://docs.google.com/spreadsheets/d/1CV9SSwuWb5LHJs947pUUsGAb21SWVi45sX3M4b0h7Ig/edit#gid=288718558).
 
 ## Goals
 1. Easily compare prices at other stores to see if you’ve found a good deal.
