@@ -10,9 +10,11 @@ import SwiftUI
 struct GroceryView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var products: FetchedResults<Product>
-    
+
     @State private var showingAddNewProduct = false
-    
+
+    @State private var searchText = ""
+
     // TODO: Move this to a shared location
     private let priceFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -20,7 +22,7 @@ struct GroceryView: View {
         numberFormatter.maximumFractionDigits = 2
         return numberFormatter
     }()
-        
+
     var body: some View {
         NavigationStack {
             List {
@@ -41,6 +43,14 @@ struct GroceryView: View {
                 .onDelete(perform: removeProduct)
             }
             .navigationTitle("Grocery Tracker")
+            .searchable(text: $searchText, prompt: "Search for a product")
+            .onChange(of: searchText) { _, newSearch in
+                if newSearch.isEmpty {
+                    products.nsPredicate = NSPredicate(value: true)
+                } else {
+                    products.nsPredicate = NSPredicate(format: "name CONTAINS [cd] %@", newSearch)
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     
@@ -54,7 +64,7 @@ struct GroceryView: View {
             }
         }
     }
-    
+
     func removeProduct(at offsets: IndexSet) {
         for index in offsets {
             let productToRemove = products[index]
