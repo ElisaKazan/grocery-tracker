@@ -15,20 +15,15 @@ struct ProductDetailView: View {
         self.product = product
     }
     
-    private let priceFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.maximumFractionDigits = 2
-        return numberFormatter
-    }()
-    
+    private let priceHelper = PriceHelper()
+
     var body: some View {
         let productName = product.name ?? "Unknown"
         
         Text(productName).font(.title)
         HStack {
             Text("Price:")
-            Text(priceFormatter.string(from: product.price as NSNumber)!)
+            Text(priceHelper.priceFormatter.string(from: product.price as NSNumber)!)
         }
         
         HStack {
@@ -43,7 +38,7 @@ struct ProductDetailView: View {
         
         HStack {
             Text("Sale Price:")
-            let priceToDisplay = product.salePrice > 0 ? priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
+            let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
             Text(priceToDisplay)
         }
 

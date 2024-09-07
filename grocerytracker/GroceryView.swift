@@ -15,20 +15,14 @@ struct GroceryView: View {
 
     @State private var searchText = ""
 
-    // TODO: Move this to a shared location
-    private let priceFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.maximumFractionDigits = 2
-        return numberFormatter
-    }()
+    private let priceHelper = PriceHelper()
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(products, id: \.id) { product in
                     let name = product.name ?? "Unknown"
-                    let price = priceFormatter.string(from: product.price as NSNumber)
+                    let price = priceHelper.priceFormatter.string(from: product.price as NSNumber)
                     NavigationLink {
                         ProductDetailView(product: product)
                     } label: {

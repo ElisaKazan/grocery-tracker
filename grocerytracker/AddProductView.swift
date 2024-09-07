@@ -23,13 +23,8 @@ struct AddProductView: View {
 
     private var stores = ["Fresh St. Market", "Costco", "No Frills", "London Drugs", "Shoppers Drugmart", "Independent", "Choices", "T&T"]
     
-    private let priceFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.maximumFractionDigits = 2
-        return numberFormatter
-    }()
-    
+    private let priceHelper = PriceHelper()
+
     var body: some View {
         NavigationStack {
             Form {
@@ -43,7 +38,7 @@ struct AddProductView: View {
 
                     HStack {
                         Text("Price")
-                        TextField("ex: $7.99", value: $price, formatter: priceFormatter)
+                        TextField("ex: $7.99", value: $price, formatter: priceHelper.priceFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
 
@@ -61,7 +56,7 @@ struct AddProductView: View {
                     HStack {
                         Text("Sale Price (optional)")
                         Spacer()
-                        TextField("ex: $3.50", value: $salePrice, formatter: priceFormatter)
+                        TextField("ex: $3.50", value: $salePrice, formatter: priceHelper.priceFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                     }
@@ -93,9 +88,7 @@ struct AddProductView: View {
                 }
             }
             .navigationTitle("Add Product")
-            
         }
-        
     }
 }
 
