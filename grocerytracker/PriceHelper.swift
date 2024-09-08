@@ -15,6 +15,12 @@ public class PriceHelper {
         return numberFormatter
     }()
 
+    public let amountFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
+        return numberFormatter
+    }()
+
     // Calculates the price per unit given price and amount
     // If g or ml, price will be per 100 units (i.e. 100 ml)
     // If kg, l or unit, price will be per single unit (i.e. 1 kg)
@@ -40,9 +46,9 @@ public class PriceHelper {
 
         if amount.quantity == 1 {
             // No need to show quantity (ex: "$10 / g")
-            return "\(prettyPrice) / \(amount.unit.description)"
+            return "\(prettyPrice) / \(amount.unit.rawValue)"
         } else {
-            return "\(prettyPrice) / \(amount.quantity) \(amount.unit.description)"
+            return "\(prettyPrice) / \(amount.quantity) \(amount.unit.rawValue)"
         }
     }
 }

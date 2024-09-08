@@ -28,9 +28,16 @@ struct ProductDetailView: View {
         
         HStack {
             Text("Amount:")
-            Text(product.amount.description)
+            Text(product.amount?.description ?? "Unknown Amount")
         }
-        
+
+        HStack {
+            Text("Price Per Unit:")
+            let pricePerUnit: (Double, Amount) = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
+            let prettyPPU = priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)
+            Text(prettyPPU)
+        }
+
         HStack {
             Text("Store:")
             Text(product.store ?? "Unknown")

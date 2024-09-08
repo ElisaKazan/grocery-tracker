@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Amount: NSObject {
+public class Amount: NSObject, NSSecureCoding {
     public var quantity: Double
     public var unit: Unit
 
@@ -20,32 +20,69 @@ public class Amount: NSObject {
         "\(quantity) \(unit)"
     }
 
-    public enum Unit: CaseIterable, Identifiable, CustomStringConvertible {
-        case milliliter
-        case litre
-        case gram
-        case kilogram
-        case unit
+    public enum Unit: String, CaseIterable, Identifiable {
+        case milliliter = "ml"
+        case litre = "L"
+        case gram = "g"
+        case kilogram = "kg"
+        case unit = "unit"
 
         public var id: Self { self }
-
-        public var description: String {
-            switch self {
-            case .milliliter:
-                return "ml"
-            case .litre:
-                return "l"
-            case .gram:
-                return "g"
-            case .kilogram:
-                return "kg"
-            case .unit:
-                return "unit"
-            }
-        }
     }
 
     // TODO: Compare Volume (ml and l) using Measurement
 
     // TODO: Compare Mass (g and kg) using Measurement
+
+    // NSCoding
+
+    public required init?(coder: NSCoder) {
+        quantity = coder.decodeObject(forKey: "quantity") as? Double ?? 0
+        let unitRawValue = coder.decodeObject(forKey: "unit") as? String ?? "unit"
+        unit = Unit(rawValue: unitRawValue) ?? .unit
+    }
+
+    public func encode(with coder: NSCoder) {
+        coder.encode(quantity, forKey: "quantity")
+        coder.encode(unit.rawValue, forKey: "unit")
+    }
+
+    // NSSecureCoding
+    public static var supportsSecureCoding: Bool = true
+}
+
+@objc(AmountTransformer)
+public class AmountTransformer: ValueTransformer {
+
+    override public func transformedValue(_ value: Any?) -> Any? {
+        guard let amount = value as? Amount else { return nil }
+
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: amount, requiringSecureCoding: true)
+            return data
+        } catch {
+            assertionFailure("Failed to transform `Amount` to `Data`")
+            return nil
+        }
+    }
+
+    override public func reverseTransformedValue(_ value: Any?) -> Any? {
+        guard let data = value as? NSData else { return nil }
+
+        do {
+            let amount = try NSKeyedUnarchiver.unarchivedObject(ofClass: Amount.self, from: data as Data)
+            return amount
+        } catch {
+            assertionFailure("Failed to transform `Data` to `Amount`")
+            return nil
+        }
+    }
+
+    override public class func transformedValueClass() -> AnyClass {
+        return Amount.self
+    }
+
+    override public class func allowsReverseTransformation() -> Bool {
+        return true
+    }
 }
