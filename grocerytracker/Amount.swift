@@ -36,9 +36,14 @@ public class Amount: NSObject, NSSecureCoding {
 
     // NSCoding
 
+    private enum CodingKeys: String {
+        case quantity
+        case unit
+    }
+
     public required init?(coder: NSCoder) {
-        quantity = coder.decodeObject(forKey: "quantity") as? Double ?? 0
-        let unitRawValue = coder.decodeObject(forKey: "unit") as? String ?? "unit"
+        quantity = coder.decodeDouble(forKey: CodingKeys.quantity.rawValue)
+        let unitRawValue = coder.decodeObject(of: [Amount.self, NSString.self], forKey: CodingKeys.unit.rawValue) as? String ?? "unit"
         unit = Unit(rawValue: unitRawValue) ?? .unit
     }
 
