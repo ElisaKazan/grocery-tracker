@@ -10,6 +10,8 @@
 		31AEFCD52C7D4C450076AE8D /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCD42C7D4C450076AE8D /* ProductDetailView.swift */; };
 		31AEFCD72C7D4C740076AE8D /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCD62C7D4C740076AE8D /* AddProductView.swift */; };
 		31AEFCDD2C8CC59D0076AE8D /* PriceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */; };
+		31AEFCDF2C8CC89D0076AE8D /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCDE2C8CC89D0076AE8D /* Amount.swift */; };
+		31AEFCEE2C90F3B00076AE8D /* PriceHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCED2C90F3B00076AE8D /* PriceHelperTests.swift */; };
 		31F2A86A2C6D69B000B7B494 /* grocerytrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2A8692C6D69B000B7B494 /* grocerytrackerApp.swift */; };
 		31F2A86C2C6D69B000B7B494 /* GroceryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2A86B2C6D69B000B7B494 /* GroceryView.swift */; };
 		31F2A86E2C6D69B100B7B494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31F2A86D2C6D69B100B7B494 /* Assets.xcassets */; };
@@ -18,10 +20,23 @@
 		31F2A87B2C6D81B100B7B494 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2A87A2C6D81B100B7B494 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		31AEFCE82C90F3280076AE8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 31F2A85E2C6D69B000B7B494 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 31F2A8652C6D69B000B7B494;
+			remoteInfo = grocerytracker;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		31AEFCD42C7D4C450076AE8D /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		31AEFCD62C7D4C740076AE8D /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceHelper.swift; sourceTree = "<group>"; };
+		31AEFCDE2C8CC89D0076AE8D /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
+		31AEFCE42C90F3280076AE8D /* grocerytrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = grocerytrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		31AEFCED2C90F3B00076AE8D /* PriceHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceHelperTests.swift; sourceTree = "<group>"; };
 		31F2A8662C6D69B000B7B494 /* grocerytracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = grocerytracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31F2A8692C6D69B000B7B494 /* grocerytrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = grocerytrackerApp.swift; sourceTree = "<group>"; };
 		31F2A86B2C6D69B000B7B494 /* GroceryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryView.swift; sourceTree = "<group>"; };
@@ -32,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		31AEFCE12C90F3280076AE8D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31F2A8632C6D69B000B7B494 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,11 +64,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31AEFCE52C90F3280076AE8D /* grocerytrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				31AEFCED2C90F3B00076AE8D /* PriceHelperTests.swift */,
+			);
+			path = grocerytrackerTests;
+			sourceTree = "<group>";
+		};
 		31F2A85D2C6D69B000B7B494 = {
 			isa = PBXGroup;
 			children = (
-				31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */,
 				31F2A8682C6D69B000B7B494 /* grocerytracker */,
+				31AEFCE52C90F3280076AE8D /* grocerytrackerTests */,
 				31F2A8672C6D69B000B7B494 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				31F2A8662C6D69B000B7B494 /* grocerytracker.app */,
+				31AEFCE42C90F3280076AE8D /* grocerytrackerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +97,8 @@
 				31F2A86B2C6D69B000B7B494 /* GroceryView.swift */,
 				31AEFCD42C7D4C450076AE8D /* ProductDetailView.swift */,
 				31AEFCD62C7D4C740076AE8D /* AddProductView.swift */,
+				31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */,
+				31AEFCDE2C8CC89D0076AE8D /* Amount.swift */,
 				31F2A8772C6D811800B7B494 /* GroceryTracker.xcdatamodeld */,
 				31F2A87A2C6D81B100B7B494 /* DataController.swift */,
 				31F2A86D2C6D69B100B7B494 /* Assets.xcassets */,
@@ -85,6 +118,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		31AEFCE32C90F3280076AE8D /* grocerytrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31AEFCEA2C90F3280076AE8D /* Build configuration list for PBXNativeTarget "grocerytrackerTests" */;
+			buildPhases = (
+				31AEFCE02C90F3280076AE8D /* Sources */,
+				31AEFCE12C90F3280076AE8D /* Frameworks */,
+				31AEFCE22C90F3280076AE8D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31AEFCE92C90F3280076AE8D /* PBXTargetDependency */,
+			);
+			name = grocerytrackerTests;
+			productName = grocerytrackerTests;
+			productReference = 31AEFCE42C90F3280076AE8D /* grocerytrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		31F2A8652C6D69B000B7B494 /* grocerytracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 31F2A8742C6D69B100B7B494 /* Build configuration list for PBXNativeTarget "grocerytracker" */;
@@ -112,6 +163,10 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					31AEFCE32C90F3280076AE8D = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 31F2A8652C6D69B000B7B494;
+					};
 					31F2A8652C6D69B000B7B494 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -131,11 +186,19 @@
 			projectRoot = "";
 			targets = (
 				31F2A8652C6D69B000B7B494 /* grocerytracker */,
+				31AEFCE32C90F3280076AE8D /* grocerytrackerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		31AEFCE22C90F3280076AE8D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31F2A8642C6D69B000B7B494 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +211,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		31AEFCE02C90F3280076AE8D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31AEFCEE2C90F3B00076AE8D /* PriceHelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31F2A8622C6D69B000B7B494 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +226,7 @@
 				31F2A86C2C6D69B000B7B494 /* GroceryView.swift in Sources */,
 				31AEFCD52C7D4C450076AE8D /* ProductDetailView.swift in Sources */,
 				31F2A87B2C6D81B100B7B494 /* DataController.swift in Sources */,
+				31AEFCDF2C8CC89D0076AE8D /* Amount.swift in Sources */,
 				31F2A8792C6D811800B7B494 /* GroceryTracker.xcdatamodeld in Sources */,
 				31AEFCD72C7D4C740076AE8D /* AddProductView.swift in Sources */,
 				31F2A86A2C6D69B000B7B494 /* grocerytrackerApp.swift in Sources */,
@@ -164,7 +236,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		31AEFCE92C90F3280076AE8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 31F2A8652C6D69B000B7B494 /* grocerytracker */;
+			targetProxy = 31AEFCE82C90F3280076AE8D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		31AEFCEB2C90F3280076AE8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KKFT9P6YJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = elisakazan.grocerytrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/grocerytracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/grocerytracker";
+			};
+			name = Debug;
+		};
+		31AEFCEC2C90F3280076AE8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KKFT9P6YJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = elisakazan.grocerytrackerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/grocerytracker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/grocerytracker";
+			};
+			name = Release;
+		};
 		31F2A8722C6D69B100B7B494 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -345,6 +461,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		31AEFCEA2C90F3280076AE8D /* Build configuration list for PBXNativeTarget "grocerytrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31AEFCEB2C90F3280076AE8D /* Debug */,
+				31AEFCEC2C90F3280076AE8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		31F2A8612C6D69B000B7B494 /* Build configuration list for PBXProject "grocerytracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
