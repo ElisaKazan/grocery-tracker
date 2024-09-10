@@ -47,7 +47,7 @@ struct AddProductView: View {
 
                     HStack {
                         Text("Amount")
-                        TextField("100", value: $quantity, formatter: priceHelper.amountFormatter)
+                        TextField("100", value: $quantity, formatter: priceHelper.quantityFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                         Picker("", selection: $unit) {

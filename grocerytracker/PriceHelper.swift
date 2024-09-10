@@ -15,7 +15,8 @@ public class PriceHelper {
         return numberFormatter
     }()
 
-    public let amountFormatter: NumberFormatter = {
+    // Use for user input of quantity (i.e. preserve 1.9 kg)
+    public let quantityFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.usesSignificantDigits = true
         return numberFormatter
@@ -43,12 +44,13 @@ public class PriceHelper {
     // String representation of price per unit
     public func prettyPricePerUnit(price: Double, amount: Amount) -> String {
         let prettyPrice = priceFormatter.string(for: price)!
+        let prettyQuantity = NumberFormatter().string(for: amount.quantity)!
 
         if amount.quantity == 1 {
-            // No need to show quantity (ex: "$10 / g")
+            // No need to show quantity (ex: "$10 / kg")
             return "\(prettyPrice) / \(amount.unit.rawValue)"
         } else {
-            return "\(prettyPrice) / \(amount.quantity) \(amount.unit.rawValue)"
+            return "\(prettyPrice) / \(prettyQuantity) \(amount.unit.rawValue)"
         }
     }
 }
