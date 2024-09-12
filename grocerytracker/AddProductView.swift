@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 struct AddProductView: View {
+    @State private var categories: FetchedResults<ProductCategory>
+
+    init(categories: FetchedResults<ProductCategory>) {
+        self.categories = categories
+    }
+
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var moc
     
@@ -85,15 +91,42 @@ struct AddProductView: View {
                 
                 Section {
                     Button("Add Product") {
-                        let product = Product(context: moc)
-                        product.id = UUID()
-                        product.name = productName
-                        product.price = price
-                        product.amount = Amount(quantity: quantity, unit: unit)
-                        product.store = $store.wrappedValue
-                        product.salePrice = salePrice
-                        product.brand = brand
-                        product.lastUpdated = Date()
+                        // Check if category already exists
+                        if let existingCategory = categories.first(where: { category in
+                            category.name == productName
+                        }) {
+                            // Create new product within existing category
+                            let newProduct = Product(context: moc)
+                            newProduct.id = UUID()
+                            newProduct.price = price
+                            newProduct.amount = Amount(quantity: quantity, unit: unit)
+                            newProduct.store = $store.wrappedValue
+                            newProduct.salePrice = salePrice
+                            newProduct.brand = brand
+                            newProduct.lastUpdated = Date()
+
+                            var products = existingCategory.products?.allObjects ?? []
+                            products.append(newProduct)
+
+                            existingCategory.products = NSSet(array: products)
+                        } else {
+                            // Create new product within a new category
+                            let newCategory = ProductCategory(context: moc)
+                            newCategory.id = UUID()
+                            newCategory.name = productName
+
+                            let newProduct = Product(context: moc)
+                            newProduct.id = UUID()
+                            newProduct.price = price
+                            newProduct.amount = Amount(quantity: quantity, unit: unit)
+                            newProduct.store = $store.wrappedValue
+                            newProduct.salePrice = salePrice
+                            newProduct.brand = brand
+                            newProduct.lastUpdated = Date()
+
+                            newCategory.products = NSSet(array: [newProduct])
+                        }
+
                         if moc.hasChanges {
                             try? moc.save()
                         }
@@ -107,6 +140,6 @@ struct AddProductView: View {
     }
 }
 
-#Preview {
-    AddProductView()
-}
+//#Preview {
+//    AddProductView()
+//}

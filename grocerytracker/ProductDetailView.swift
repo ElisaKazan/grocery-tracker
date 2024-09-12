@@ -2,7 +2,7 @@
 //  ProductDetailView.swift
 //  grocerytracker
 //
-//  Created by Elisa Kazan on 2024-08-26.
+//  Created by Elisa Kazan on 2024-09-12.
 //
 
 import Foundation
@@ -10,22 +10,22 @@ import SwiftUI
 
 struct ProductDetailView: View {
     @State private var product: Product
-    
-    init(product: Product) {
+    private var name: String
+
+    init(name: String, product: Product) {
         self.product = product
+        self.name = name
     }
-    
+
     private let priceHelper = PriceHelper()
 
     var body: some View {
-        let productName = product.name ?? "Unknown"
-        
-        Text(productName).font(.title)
+        Text(name).font(.title)
         HStack {
             Text("Price:")
             Text(priceHelper.priceFormatter.string(from: product.price as NSNumber)!)
         }
-        
+
         HStack {
             Text("Amount:")
             Text(product.amount?.description ?? "Unknown Amount")
@@ -42,7 +42,7 @@ struct ProductDetailView: View {
             Text("Store:")
             Text(product.store ?? "Unknown")
         }
-        
+
         HStack {
             Text("Sale Price:")
             let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
@@ -58,7 +58,5 @@ struct ProductDetailView: View {
             Text("Last Updated:")
             Text(product.lastUpdated!, style: .date)
         }
-        
-        
     }
 }
