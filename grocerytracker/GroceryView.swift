@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroceryView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var products: FetchedResults<Product>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var categories: FetchedResults<ProductCategory>
 
     @State private var showingAddNewProduct = false
 
@@ -20,29 +20,30 @@ struct GroceryView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(products, id: \.id) { product in
-                    let name = product.name ?? "Unknown"
-                    let price = priceHelper.priceFormatter.string(from: product.price as NSNumber)
+                ForEach(categories, id: \.id) { category in
+                    let name = category.name ?? "Unknown Category"
+                    let productCount = category.products?.count ?? 0
                     NavigationLink {
-                        ProductDetailView(product: product)
+                        ProductCategoryDetailView(categories: categories, category: category)
                     } label: {
-                        HStack{
+                        HStack {
                             Text(name)
                                 .font(.headline)
-                            Text(price!)
+                            Spacer()
+                            Text(productCount.description)
                                 .font(.subheadline)
                         }
                     }
                 }
-                .onDelete(perform: removeProduct)
+                .onDelete(perform: removeCategory)
             }
             .navigationTitle("Grocery Tracker")
             .searchable(text: $searchText, prompt: "Search for a product")
             .onChange(of: searchText) { _, newSearch in
                 if newSearch.isEmpty {
-                    products.nsPredicate = NSPredicate(value: true)
+                    categories.nsPredicate = NSPredicate(value: true)
                 } else {
-                    products.nsPredicate = NSPredicate(format: "name CONTAINS [cd] %@", newSearch)
+                    categories.nsPredicate = NSPredicate(format: "name CONTAINS [cd] %@", newSearch)
                 }
             }
             .toolbar {
@@ -54,15 +55,16 @@ struct GroceryView: View {
                 }
             }
             .sheet(isPresented: $showingAddNewProduct) {
-                AddProductView()
+                AddProductView(categories: categories)
             }
         }
     }
 
-    func removeProduct(at offsets: IndexSet) {
+    func removeCategory(at offsets: IndexSet) {
+        // TODO: Add confirmation dialog because this will also delete all products in the category as well
         for index in offsets {
-            let productToRemove = products[index]
-            moc.delete(productToRemove)
+            let categoryToRemove = categories[index]
+            moc.delete(categoryToRemove)
             try? moc.save()
         }
     }
