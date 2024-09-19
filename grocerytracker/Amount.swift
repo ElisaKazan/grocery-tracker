@@ -7,6 +7,7 @@
 
 import Foundation
 
+@objc(Amount)
 public class Amount: NSObject, NSSecureCoding {
     public var quantity: Double
     public var unit: Unit
