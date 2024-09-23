@@ -23,7 +23,7 @@ struct ProductDetailView: View {
         Text(name).font(.title)
         HStack {
             Text("Price:")
-            Text(priceHelper.priceFormatter.string(from: product.price as NSNumber)!)
+            Text(priceHelper.priceFormatter.string(from: product.cost!.price as NSNumber)!)
         }
 
         HStack {
@@ -43,12 +43,6 @@ struct ProductDetailView: View {
         HStack {
             Text("Store:")
             Text(product.store ?? "Unknown Store")
-        }
-
-        HStack {
-            Text("Sale Price:")
-            let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown Sale Price"
-            Text(priceToDisplay)
         }
 
         HStack {

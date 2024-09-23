@@ -98,10 +98,8 @@ struct AddProductView: View {
                             // Create new product within existing category
                             let newProduct = Product(context: moc)
                             newProduct.id = UUID()
-                            newProduct.price = price
                             newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
                             newProduct.store = $store.wrappedValue
-                            newProduct.salePrice = salePrice
                             newProduct.brand = brand.isEmpty ? nil : brand
                             newProduct.lastUpdated = Date()
 
@@ -118,10 +116,8 @@ struct AddProductView: View {
                             let newProduct = Product(context: moc)
 
                             newProduct.id = UUID()
-                            newProduct.price = price
                             newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
                             newProduct.store = $store.wrappedValue
-                            newProduct.salePrice = salePrice
                             newProduct.brand = brand.isEmpty ? nil : brand
                             newProduct.lastUpdated = Date()
 
