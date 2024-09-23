@@ -34,10 +34,10 @@ struct ProductCategoryDetailView: View {
                         HStack {
                             Text(product.store ?? "Unknown Store")
                             VStack {
-                                Text(priceHelper.prettyPricePerUnit(price: product.price, amount: product.amount!))
+                                Text(priceHelper.prettyPricePerUnit(cost: product.cost!))
                                     .font(.headline)
-                                let pricePerUnit = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
-                                Text("(\(priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)))")
+                                let pricePerUnit = priceHelper.pricePerUnit(cost: product.cost!)
+                                Text("(\(priceHelper.prettyPricePerUnit(cost: pricePerUnit))")
                                     .font(.subheadline)
                             }
                         }

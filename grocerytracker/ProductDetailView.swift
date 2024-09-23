@@ -23,35 +23,28 @@ struct ProductDetailView: View {
         Text(name).font(.title)
         HStack {
             Text("Price:")
-            Text(priceHelper.priceFormatter.string(from: product.price as NSNumber)!)
+            Text(priceHelper.priceFormatter.string(from: product.cost!.price as NSNumber)!)
         }
 
         HStack {
             Text("Amount:")
-            Text(product.amount?.description ?? "Unknown Amount")
+            Text(product.cost?.amountDescription ?? "Unknown Amount")
         }
 
         HStack {
             Text("Price Per Unit:")
-            let pricePerUnit: (Double, Amount) = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
-            let prettyPPU = priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)
-            Text(prettyPPU)
+            let pricePerUnit = priceHelper.pricePerUnit(cost: product.cost!)
+            Text(priceHelper.prettyPricePerUnit(cost: pricePerUnit))
         }
 
         HStack {
             Text("Store:")
-            Text(product.store ?? "Unknown")
-        }
-
-        HStack {
-            Text("Sale Price:")
-            let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
-            Text(priceToDisplay)
+            Text(product.store ?? "Unknown Store")
         }
 
         HStack {
             Text("Brand:")
-            Text(product.brand ?? "Unknown")
+            Text(product.brand ?? "Unknown Brand")
         }
 
         HStack {

@@ -25,32 +25,32 @@ public class PriceHelper {
     // Calculates the price per unit given price and amount
     // If g or ml, price will be per 100 units (i.e. 100 ml)
     // If kg, l or unit, price will be per single unit (i.e. 1 kg)
-    public func pricePerUnit(price: Double, amount: Amount) -> (Double, Amount) {
+    public func pricePerUnit(cost: Cost) -> Cost {
         let pricePerUnit: Double
         let quantity: Double
 
-        switch amount.unit {
+        switch cost.unit {
         case .milliliter, .gram:
-            pricePerUnit = (price / amount.quantity) * 100
+            pricePerUnit = (cost.price / cost.quantity) * 100
             quantity = 100
         case .litre, .kilogram, .unit:
-            pricePerUnit = price / amount.quantity
+            pricePerUnit = cost.price / cost.quantity
             quantity = 1
         }
 
-        return (pricePerUnit, Amount(quantity: quantity, unit: amount.unit))
+        return Cost(price: pricePerUnit, quantity: quantity, unit: cost.unit)
     }
 
     // String representation of price per unit
-    public func prettyPricePerUnit(price: Double, amount: Amount) -> String {
-        let prettyPrice = priceFormatter.string(for: price)!
-        let prettyQuantity = NumberFormatter().string(for: amount.quantity)!
+    public func prettyPricePerUnit(cost: Cost) -> String {
+        let prettyPrice = priceFormatter.string(for: cost.price)!
+        let prettyQuantity = NumberFormatter().string(for: cost.quantity)!
 
-        if amount.quantity == 1 {
+        if cost.quantity == 1 {
             // No need to show quantity (ex: "$10 / kg")
-            return "\(prettyPrice) / \(amount.unit.rawValue)"
+            return "\(prettyPrice) / \(cost.unit.rawValue)"
         } else {
-            return "\(prettyPrice) / \(prettyQuantity) \(amount.unit.rawValue)"
+            return "\(prettyPrice) / \(prettyQuantity) \(cost.unit.rawValue)"
         }
     }
 }
