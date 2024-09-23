@@ -28,30 +28,32 @@ struct ProductDetailView: View {
 
         HStack {
             Text("Amount:")
-            Text(product.amount?.description ?? "Unknown Amount")
+            Text(product.cost?.amountDescription ?? "Unknown Amount")
         }
 
         HStack {
             Text("Price Per Unit:")
-            let pricePerUnit: (Double, Amount) = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
-            let prettyPPU = priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)
-            Text(prettyPPU)
+            // TODO: Update this 
+//            let pricePerUnit: (Double, Amount) = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
+//            let prettyPPU = priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)
+//            Text(prettyPPU)
+            Text("coming soon...")
         }
 
         HStack {
             Text("Store:")
-            Text(product.store ?? "Unknown")
+            Text(product.store ?? "Unknown Store")
         }
 
         HStack {
             Text("Sale Price:")
-            let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown"
+            let priceToDisplay = product.salePrice > 0 ? priceHelper.priceFormatter.string(from: product.salePrice as NSNumber)! : "Unknown Sale Price"
             Text(priceToDisplay)
         }
 
         HStack {
             Text("Brand:")
-            Text(product.brand ?? "Unknown")
+            Text(product.brand ?? "Unknown Brand")
         }
 
         HStack {

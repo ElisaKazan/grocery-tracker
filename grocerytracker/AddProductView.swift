@@ -22,7 +22,7 @@ struct AddProductView: View {
     @State private var productName = ""
     @State private var price: Double = 0.0
     @State private var quantity: Double = 0.0
-    @State private var unit: Amount.Unit = .unit
+    @State private var unit: Cost.Unit = .unit
     @State private var store: String = "Fresh St. Market"
     
     // Optional Properties
@@ -57,7 +57,7 @@ struct AddProductView: View {
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                         Picker("", selection: $unit) {
-                            ForEach(Amount.Unit.allCases) { option in
+                            ForEach(Cost.Unit.allCases) { option in
                                 Text(option.rawValue)
                             }
                         }
@@ -99,10 +99,10 @@ struct AddProductView: View {
                             let newProduct = Product(context: moc)
                             newProduct.id = UUID()
                             newProduct.price = price
-                            newProduct.amount = Amount(quantity: quantity, unit: unit)
+                            newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
                             newProduct.store = $store.wrappedValue
                             newProduct.salePrice = salePrice
-                            newProduct.brand = brand
+                            newProduct.brand = brand.isEmpty ? nil : brand
                             newProduct.lastUpdated = Date()
 
                             var products = existingCategory.products?.allObjects ?? []
@@ -116,12 +116,13 @@ struct AddProductView: View {
                             newCategory.name = productName
 
                             let newProduct = Product(context: moc)
+
                             newProduct.id = UUID()
                             newProduct.price = price
-                            newProduct.amount = Amount(quantity: quantity, unit: unit)
+                            newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
                             newProduct.store = $store.wrappedValue
                             newProduct.salePrice = salePrice
-                            newProduct.brand = brand
+                            newProduct.brand = brand.isEmpty ? nil : brand
                             newProduct.lastUpdated = Date()
 
                             newCategory.products = NSSet(array: [newProduct])

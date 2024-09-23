@@ -1,5 +1,5 @@
 //
-//  Amount.swift
+//  Cost.swift
 //  grocerytracker
 //
 //  Created by Elisa Kazan on 2024-09-07.
@@ -7,17 +7,23 @@
 
 import Foundation
 
-@objc(Amount)
-public class Amount: NSObject, NSSecureCoding {
+@objc(Cost)
+public class Cost: NSObject, NSSecureCoding {
+    public var price: Double
     public var quantity: Double
     public var unit: Unit
 
-    init(quantity: Double, unit: Unit) {
+    init(price: Double, quantity: Double, unit: Unit) {
+        self.price = price
         self.quantity = quantity
         self.unit = unit
     }
 
     public override var description: String {
+        "Cost: \(price), \(quantity), \(unit)"
+    }
+
+    public var amountDescription: String {
         "\(quantity) \(unit)"
     }
 
@@ -38,36 +44,39 @@ public class Amount: NSObject, NSSecureCoding {
     // NSCoding
 
     private enum CodingKeys: String {
+        case price
         case quantity
         case unit
     }
 
     public required init?(coder: NSCoder) {
+        price = coder.decodeDouble(forKey: CodingKeys.price.rawValue)
         quantity = coder.decodeDouble(forKey: CodingKeys.quantity.rawValue)
-        let unitRawValue = coder.decodeObject(of: [Amount.self, NSString.self], forKey: CodingKeys.unit.rawValue) as? String ?? "unit"
+        let unitRawValue = coder.decodeObject(of: [Cost.self, NSString.self], forKey: CodingKeys.unit.rawValue) as? String ?? "unit"
         unit = Unit(rawValue: unitRawValue) ?? .unit
     }
 
     public func encode(with coder: NSCoder) {
-        coder.encode(quantity, forKey: "quantity")
-        coder.encode(unit.rawValue, forKey: "unit")
+        coder.encode(price, forKey: CodingKeys.price.rawValue)
+        coder.encode(quantity, forKey: CodingKeys.quantity.rawValue)
+        coder.encode(unit.rawValue, forKey: CodingKeys.unit.rawValue)
     }
 
     // NSSecureCoding
     public static var supportsSecureCoding: Bool = true
 }
 
-@objc(AmountTransformer)
-public class AmountTransformer: ValueTransformer {
+@objc(CostTransformer)
+public class CostTransformer: ValueTransformer {
 
     override public func transformedValue(_ value: Any?) -> Any? {
-        guard let amount = value as? Amount else { return nil }
+        guard let cost = value as? Cost else { return nil }
 
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: amount, requiringSecureCoding: true)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: cost, requiringSecureCoding: true)
             return data
         } catch {
-            assertionFailure("Failed to transform `Amount` to `Data`")
+            assertionFailure("Failed to transform `Cost` to `Data`")
             return nil
         }
     }
@@ -76,16 +85,16 @@ public class AmountTransformer: ValueTransformer {
         guard let data = value as? NSData else { return nil }
 
         do {
-            let amount = try NSKeyedUnarchiver.unarchivedObject(ofClass: Amount.self, from: data as Data)
-            return amount
+            let cost = try NSKeyedUnarchiver.unarchivedObject(ofClass: Cost.self, from: data as Data)
+            return cost
         } catch {
-            assertionFailure("Failed to transform `Data` to `Amount`")
+            assertionFailure("Failed to transform `Data` to `Cost`")
             return nil
         }
     }
 
     override public class func transformedValueClass() -> AnyClass {
-        return Amount.self
+        return Cost.self
     }
 
     override public class func allowsReverseTransformation() -> Bool {
