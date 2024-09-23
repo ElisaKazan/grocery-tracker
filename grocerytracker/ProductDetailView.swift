@@ -33,11 +33,8 @@ struct ProductDetailView: View {
 
         HStack {
             Text("Price Per Unit:")
-            // TODO: Update this 
-//            let pricePerUnit: (Double, Amount) = priceHelper.pricePerUnit(price: product.price, amount: product.amount!)
-//            let prettyPPU = priceHelper.prettyPricePerUnit(price: pricePerUnit.0, amount: pricePerUnit.1)
-//            Text(prettyPPU)
-            Text("coming soon...")
+            let pricePerUnit = priceHelper.pricePerUnit(cost: product.cost!)
+            Text(priceHelper.prettyPricePerUnit(cost: pricePerUnit))
         }
 
         HStack {
