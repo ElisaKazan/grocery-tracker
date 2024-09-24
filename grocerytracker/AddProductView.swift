@@ -91,18 +91,21 @@ struct AddProductView: View {
                 
                 Section {
                     Button("Add Product") {
+
+                        let newProduct = Product(context: moc)
+                        let cost = Cost(price: price, quantity: quantity, unit: unit)
+                        newProduct.id = UUID()
+                        newProduct.cost = cost
+                        newProduct.store = $store.wrappedValue
+                        newProduct.brand = brand.isEmpty ? nil : brand
+                        newProduct.lastUpdated = Date()
+                        newProduct.pricePerUnit = priceHelper.pricePerUnit(cost: cost)
+
                         // Check if category already exists
                         if let existingCategory = categories.first(where: { category in
                             category.name == productName
                         }) {
                             // Create new product within existing category
-                            let newProduct = Product(context: moc)
-                            newProduct.id = UUID()
-                            newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
-                            newProduct.store = $store.wrappedValue
-                            newProduct.brand = brand.isEmpty ? nil : brand
-                            newProduct.lastUpdated = Date()
-
                             var products = existingCategory.products?.allObjects ?? []
                             products.append(newProduct)
 
@@ -112,14 +115,6 @@ struct AddProductView: View {
                             let newCategory = ProductCategory(context: moc)
                             newCategory.id = UUID()
                             newCategory.name = productName
-
-                            let newProduct = Product(context: moc)
-
-                            newProduct.id = UUID()
-                            newProduct.cost = Cost(price: price, quantity: quantity, unit: unit)
-                            newProduct.store = $store.wrappedValue
-                            newProduct.brand = brand.isEmpty ? nil : brand
-                            newProduct.lastUpdated = Date()
 
                             newCategory.products = NSSet(array: [newProduct])
                         }
