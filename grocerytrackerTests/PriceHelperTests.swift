@@ -129,4 +129,30 @@ final class PriceHelperTests: XCTestCase {
         XCTAssertEqual(prettyText, "$1.33 / unit")
     }
 
+    // MARK: - CheapestProduct
+
+    func testCheapestProduct() {
+        guard let moc = CoreDataContextBuilder.buildTestContext() else {
+            assertionFailure("Building Managed Object Context failed")
+            return
+        }
+
+        let priceHelper = PriceHelper()
+
+        let productA = Product(context: moc)
+        productA.pricePerUnit = Cost(price: 4.99, quantity: 1, unit: .gram)
+
+        XCTAssertNotNil(productA.pricePerUnit)
+
+        let productB = Product(context: moc)
+        productB.pricePerUnit = Cost(price: 3.75, quantity: 1, unit: .gram)
+
+        let productC = Product(context: moc)
+        productC.pricePerUnit = Cost(price: 7.23, quantity: 1, unit: .gram)
+
+        let cheapestProduct = priceHelper.cheapestProduct(products: [productA, productB, productC])
+
+        XCTAssertEqual(cheapestProduct, productB)
+    }
+
 }
