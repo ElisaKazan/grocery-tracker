@@ -62,6 +62,7 @@ struct AddProductView: View {
                 Section {
                     Button("Add Product") {
                         viewModel.addProduct()
+
                         dismiss()
                     }
                 }

@@ -53,4 +53,18 @@ public class PriceHelper {
             return "\(prettyPrice) / \(prettyQuantity) \(cost.unit.rawValue)"
         }
     }
+
+    // Determines the cheapest product out of an array of products based on price per unit.
+    // This basic function assumes all units are the same and will include unit conversion later.
+    public func cheapestProduct(products: [Product]) -> Product {
+        var cheapestProduct: Product = products[0]
+
+        for product in products {
+            if product.pricePerUnit!.price < cheapestProduct.pricePerUnit!.price {
+                cheapestProduct = product
+            }
+        }
+
+        return cheapestProduct
+    }
 }

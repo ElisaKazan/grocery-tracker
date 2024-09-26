@@ -71,6 +71,7 @@
 		31AEFCE52C90F3280076AE8D /* grocerytrackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				314911002CA364B3004F2432 /* CoreDataContextBuilder.swift */,
 				31AEFCED2C90F3B00076AE8D /* PriceHelperTests.swift */,
 			);
 			path = grocerytrackerTests;
@@ -221,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				314911012CA364BA004F2432 /* CoreDataContextBuilder.swift in Sources */,
 				31AEFCEE2C90F3B00076AE8D /* PriceHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

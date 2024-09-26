@@ -33,8 +33,8 @@ struct ProductDetailView: View {
 
         HStack {
             Text("Price Per Unit:")
-            let pricePerUnit = priceHelper.pricePerUnit(cost: product.cost!)
-            Text(priceHelper.prettyPricePerUnit(cost: pricePerUnit))
+            let pricePerUnitString = product.pricePerUnit != nil ? priceHelper.prettyPricePerUnit(cost: product.pricePerUnit!) : "Unknown Price Per Unit"
+            Text(pricePerUnitString)
         }
 
         HStack {
