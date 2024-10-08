@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		314911012CA364BA004F2432 /* CoreDataContextBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314911002CA364B3004F2432 /* CoreDataContextBuilder.swift */; };
+		314911032CA61AC1004F2432 /* AddProductView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314911022CA61AC1004F2432 /* AddProductView+ViewModel.swift */; };
 		31AEFCD52C7D4C450076AE8D /* ProductCategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCD42C7D4C450076AE8D /* ProductCategoryDetailView.swift */; };
 		31AEFCD72C7D4C740076AE8D /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCD62C7D4C740076AE8D /* AddProductView.swift */; };
 		31AEFCDD2C8CC59D0076AE8D /* PriceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */; };
@@ -33,7 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		314911002CA364B3004F2432 /* CoreDataContextBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataContextBuilder.swift; sourceTree = "<group>"; };
+		314911022CA61AC1004F2432 /* AddProductView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddProductView+ViewModel.swift"; sourceTree = "<group>"; };
 		31AEFCD42C7D4C450076AE8D /* ProductCategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryDetailView.swift; sourceTree = "<group>"; };
 		31AEFCD62C7D4C740076AE8D /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceHelper.swift; sourceTree = "<group>"; };
@@ -103,6 +103,7 @@
 				31AEFCD42C7D4C450076AE8D /* ProductCategoryDetailView.swift */,
 				31AEFCEF2C938D500076AE8D /* ProductDetailView.swift */,
 				31AEFCD62C7D4C740076AE8D /* AddProductView.swift */,
+				314911022CA61AC1004F2432 /* AddProductView+ViewModel.swift */,
 				31AEFCDC2C8CC59D0076AE8D /* PriceHelper.swift */,
 				31AEFCDE2C8CC89D0076AE8D /* Cost.swift */,
 				31F2A8772C6D811800B7B494 /* GroceryTracker.xcdatamodeld */,
@@ -233,6 +234,7 @@
 				31F2A86C2C6D69B000B7B494 /* GroceryView.swift in Sources */,
 				31AEFCD52C7D4C450076AE8D /* ProductCategoryDetailView.swift in Sources */,
 				31F2A87B2C6D81B100B7B494 /* DataController.swift in Sources */,
+				314911032CA61AC1004F2432 /* AddProductView+ViewModel.swift in Sources */,
 				31AEFCDF2C8CC89D0076AE8D /* Cost.swift in Sources */,
 				31F2A8792C6D811800B7B494 /* GroceryTracker.xcdatamodeld in Sources */,
 				31AEFCD72C7D4C740076AE8D /* AddProductView.swift in Sources */,

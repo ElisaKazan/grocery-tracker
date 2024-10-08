@@ -9,28 +9,8 @@ import Foundation
 import SwiftUI
 
 struct AddProductView: View {
-    @State private var categories: FetchedResults<ProductCategory>
-
-    init(categories: FetchedResults<ProductCategory>) {
-        self.categories = categories
-    }
-
     @Environment(\.dismiss) var dismiss
-    @Environment(\.managedObjectContext) var moc
-    
-    // Required Properties
-    @State private var productName = ""
-    @State private var price: Double = 0.0
-    @State private var quantity: Double = 0.0
-    @State private var unit: Cost.Unit = .unit
-    @State private var store: String = "Fresh St. Market"
-    
-    // Optional Properties
-    @State private var salePrice: Double = 0.0
-    @State private var brand: String = ""
-
-    private var stores = ["Fresh St. Market", "Costco", "No Frills", "London Drugs", "Shoppers Drugmart", "Independent", "Choices", "T&T"]
-    
+    @StateObject var viewModel: ViewModel
     private let priceHelper = PriceHelper()
 
     var body: some View {
@@ -39,24 +19,24 @@ struct AddProductView: View {
                 Section {
                     HStack {
                         Text("Product Name")
-                        TextField("ex: Milk", text: $productName)
+                        TextField("ex: Milk", text: $viewModel.product.name)
                             .textInputAutocapitalization(.words)
                             .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Price")
-                        TextField("ex: $7.99", value: $price, formatter: priceHelper.priceFormatter)
+                        TextField("ex: $7.99", value: $viewModel.product.price, formatter: priceHelper.priceFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Amount")
-                        TextField("100", value: $quantity, formatter: priceHelper.quantityFormatter)
+                        TextField("100", value: $viewModel.product.quantity, formatter: priceHelper.quantityFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
-                        Picker("", selection: $unit) {
+                        Picker("", selection: $viewModel.product.unit) {
                             ForEach(Cost.Unit.allCases) { option in
                                 Text(option.rawValue)
                             }
@@ -64,26 +44,16 @@ struct AddProductView: View {
                         .frame(maxWidth: 70)
                     }
 
-                    Picker("Store", selection: $store) {
+                    Picker("Store", selection: $viewModel.product.store) {
                         Text("select a store").tag(Optional<String>(nil))
-                        ForEach(stores, id: \.self) {
+                        ForEach(viewModel.stores, id: \.self) {
                             Text($0)
                         }
-                    }
-                }
-
-                Section {
-                    HStack {
-                        Text("Sale Price (optional)")
-                        Spacer()
-                        TextField("ex: $3.50", value: $salePrice, formatter: priceHelper.priceFormatter)
-                            .keyboardType(.decimalPad)
-                            .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Brand (optional)")
-                        TextField("ex: Avalon", text: $brand)
+                        TextField("ex: Avalon", text: $viewModel.product.brand)
                             .textInputAutocapitalization(.words)
                             .multilineTextAlignment(.trailing)
                     }
@@ -91,38 +61,8 @@ struct AddProductView: View {
                 
                 Section {
                     Button("Add Product") {
+                        viewModel.addProduct()
 
-                        let newProduct = Product(context: moc)
-                        let cost = Cost(price: price, quantity: quantity, unit: unit)
-                        newProduct.id = UUID()
-                        newProduct.cost = cost
-                        newProduct.store = $store.wrappedValue
-                        newProduct.brand = brand.isEmpty ? nil : brand
-                        newProduct.lastUpdated = Date()
-                        newProduct.pricePerUnit = priceHelper.pricePerUnit(cost: cost)
-
-                        // Check if category already exists
-                        if let existingCategory = categories.first(where: { category in
-                            category.name == productName
-                        }) {
-                            // Create new product within existing category
-                            var products = existingCategory.products?.allObjects ?? []
-                            products.append(newProduct)
-
-                            existingCategory.products = NSSet(array: products)
-                        } else {
-                            // Create new product within a new category
-                            let newCategory = ProductCategory(context: moc)
-                            newCategory.id = UUID()
-                            newCategory.name = productName
-
-                            newCategory.products = NSSet(array: [newProduct])
-                        }
-
-                        if moc.hasChanges {
-                            try? moc.save()
-                        }
-                        
                         dismiss()
                     }
                 }
@@ -131,7 +71,3 @@ struct AddProductView: View {
         }
     }
 }
-
-//#Preview {
-//    AddProductView()
-//}
