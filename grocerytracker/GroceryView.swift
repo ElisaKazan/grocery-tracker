@@ -13,6 +13,10 @@ struct GroceryView: View {
 
     @State private var showingAddNewProduct = false
 
+    // Delete a category with alert
+    @State private var showingDeleteAlert = false
+    @State private var deletedIndexSet: IndexSet = IndexSet()
+
     @State private var searchText = ""
 
     private let priceHelper = PriceHelper()
@@ -35,8 +39,20 @@ struct GroceryView: View {
                         }
                     }
                 }
-                .onDelete(perform: removeCategory)
+                .onDelete { indexSet in
+                    deletedIndexSet = indexSet
+                    showingDeleteAlert = true
+                }
             }
+            .alert("Are you sure you want to delete this product?", isPresented: $showingDeleteAlert, actions: {
+                Button("Yes") {
+                    removeCategory(at: deletedIndexSet)
+                    deletedIndexSet = IndexSet()
+                }
+                Button("Cancel") {
+                    deletedIndexSet = IndexSet()
+                }
+            })
             .navigationTitle("Grocery Tracker")
             .searchable(text: $searchText, prompt: "Search for a product")
             .onChange(of: searchText) { _, newSearch in
@@ -61,7 +77,6 @@ struct GroceryView: View {
     }
 
     func removeCategory(at offsets: IndexSet) {
-        // TODO: Add confirmation dialog because this will also delete all products in the category as well
         for index in offsets {
             let categoryToRemove = categories[index]
             moc.delete(categoryToRemove)
