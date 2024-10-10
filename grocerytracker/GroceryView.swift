@@ -45,11 +45,11 @@ struct GroceryView: View {
                 }
             }
             .alert("Are you sure you want to delete this product?", isPresented: $showingDeleteAlert, actions: {
-                Button("Yes") {
+                Button("Yes", role: .destructive) {
                     removeCategory(at: deletedIndexSet)
                     deletedIndexSet = IndexSet()
                 }
-                Button("Cancel") {
+                Button("Cancel", role: .cancel) {
                     deletedIndexSet = IndexSet()
                 }
             })
