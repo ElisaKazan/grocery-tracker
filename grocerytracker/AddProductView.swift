@@ -11,7 +11,6 @@ import SwiftUI
 struct AddProductView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var viewModel: ViewModel
-    private let priceHelper = PriceHelper()
 
     var body: some View {
         NavigationStack {
@@ -26,14 +25,14 @@ struct AddProductView: View {
 
                     HStack {
                         Text("Price")
-                        TextField("ex: $7.99", value: $viewModel.product.price, formatter: priceHelper.priceFormatter)
+                        TextField("ex: $7.99", value: $viewModel.product.price, formatter: viewModel.priceHelper.priceFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                     }
 
                     HStack {
                         Text("Amount")
-                        TextField("100", value: $viewModel.product.quantity, formatter: priceHelper.quantityFormatter)
+                        TextField("100", value: $viewModel.product.quantity, formatter: viewModel.priceHelper.quantityFormatter)
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.trailing)
                         Picker("", selection: $viewModel.product.unit) {

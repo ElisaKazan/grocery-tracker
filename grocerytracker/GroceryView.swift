@@ -55,7 +55,7 @@ struct GroceryView: View {
                 }
             }
             .sheet(isPresented: $showingAddNewProduct) {
-                AddProductView(categories: categories)
+                AddProductView(viewModel: .init(moc: moc, categories: categories))
             }
         }
     }

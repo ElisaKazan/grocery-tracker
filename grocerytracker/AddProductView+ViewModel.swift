@@ -24,6 +24,8 @@ extension AddProductView {
 
         var categories: FetchedResults<ProductCategory>
 
+        let priceHelper = PriceHelper()
+
         @Published var product = ProductModel(name: "", price: 0.0, quantity: 0, unit: .unit, store: "Fresh St. Market", brand: "")
 
         init(moc: NSManagedObjectContext, categories: FetchedResults<ProductCategory>) {
@@ -34,11 +36,13 @@ extension AddProductView {
         func addProduct() {
             // Create new Product
             let newProduct = Product(context: moc)
+            let cost = Cost(price: product.price, quantity: product.quantity, unit: product.unit)
             newProduct.id = UUID()
-            newProduct.cost = Cost(price: product.price, quantity: product.quantity, unit: product.unit)
+            newProduct.cost = cost
             newProduct.store = product.store
             newProduct.brand = product.brand.isEmpty ? nil : product.brand
             newProduct.lastUpdated = Date()
+            newProduct.pricePerUnit = priceHelper.pricePerUnit(cost: cost)
 
             // Check if category already exists
             if let existingCategory = categories.first(where: { category in

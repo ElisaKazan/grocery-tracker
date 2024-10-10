@@ -37,7 +37,7 @@ struct ProductCategoryDetailView: View {
                                 Text(priceHelper.prettyPricePerUnit(cost: product.cost!))
                                     .font(.headline)
                                 let pricePerUnit = priceHelper.pricePerUnit(cost: product.cost!)
-                                Text("(\(priceHelper.prettyPricePerUnit(cost: pricePerUnit))")
+                                Text("(\(priceHelper.prettyPricePerUnit(cost: pricePerUnit)))")
                                     .font(.subheadline)
                             }
                         }
