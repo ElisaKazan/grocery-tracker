@@ -21,6 +21,7 @@ struct AddProductView: View {
                         TextField("ex: Milk", text: $viewModel.product.name)
                             .textInputAutocapitalization(.words)
                             .multilineTextAlignment(.trailing)
+                            .autocorrectionDisabled()
                     }
 
                     HStack {
